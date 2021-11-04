@@ -10,14 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DriveShare">
         <activity
-            android:name=".MainActivity"
+            android:name=".ShareFileActivity"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="@string/title_activity_share_file"
             android:theme="@style/Theme.DriveShare.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/pdf" />
             </intent-filter>
         </activity>
     </application>
