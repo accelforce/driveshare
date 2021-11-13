@@ -21,6 +21,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.DriveFileRenameOutline
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Link
 import androidx.compose.material.icons.filled.Sell
 import androidx.compose.material.icons.filled.Upload
@@ -48,7 +49,7 @@ class ShareFileActivity : ComponentActivity() {
     private val openDocument =
         registerForActivityResult(ActivityResultContracts.OpenDocument()) { pickedUri ->
             openResult = pickedUri?.let { Result.success(it) }
-                ?: TODO("cancelled")
+                ?: Result.failure(Exception("cancelled"))
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -245,7 +246,23 @@ fun ShareFileActivityContent(
                 }
             }
         }?.onFailure {
-            TODO("cancelled")
+            ParameterCard(
+                title = "Information",
+                modifier = Modifier
+                    .padding(4.dp)
+                    .fillMaxWidth(),
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = "Information",
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxSize(),
+                    )
+                },
+            ) {
+                Text(text = "File picker was cancelled", style = MaterialTheme.typography.subtitle1)
+            }
         }
     }
 }
